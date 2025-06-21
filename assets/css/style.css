@@ -75,3 +75,11 @@ body[data-theme="dark"] .dropdown-menu {
   opacity: 0;
   transition-property: opacity, transform;
 }
+.card-img-top,
+.project-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  aspect-ratio: 3/2; /* jika browser support, menjaga proporsi 600x400 */
+  background: #f6f6f6; /* warna latar jika gambar transparan */
+}
