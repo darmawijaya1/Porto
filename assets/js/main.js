@@ -4,7 +4,7 @@
   document.body.setAttribute('data-theme', theme);
 })();
 
-// 2. NAVBAR & FOOTER INCLUDE + PROJECTS + FORM EMAIL
+// 2. NAVBAR & FOOTER INCLUDE + PROJECTS
 document.addEventListener('DOMContentLoaded', () => {
   // Navbar
   fetch('components/navbar.html')
@@ -36,35 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setupFilter(projects);
         if (window.AOS) AOS.refresh();
       });
-  }
-
-  // EmailJS Form Handler (contact.html)
-  const contactForm = document.getElementById('contact-form');
-  if(contactForm) {
-    if(typeof emailjs !== "undefined") {
-      emailjs.init("669XbrGsV_TiU7jML"); // Ganti dengan PUBLIC KEY kamu!
-    }
-    contactForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      const formResult = document.getElementById('form-result');
-      const submitBtn = this.querySelector('button[type="submit"]');
-      formResult.innerHTML = "<div class='text-info'>Mengirim...</div>";
-      submitBtn.disabled = true;
-
-      emailjs.send("service_c99hrhr", "template_qebox05", {
-        name: document.getElementById('name').value,
-        from_email: document.getElementById('email').value,
-        message: document.getElementById('message').value,
-        time: new Date().toLocaleString("id-ID")
-      }).then(function(response) {
-        formResult.innerHTML = '<div class="alert alert-success mt-2" role="alert">Pesan terkirim! Terima kasih sudah menghubungi 😊</div>';
-        contactForm.reset();
-        submitBtn.disabled = false;
-      }, function(error) {
-        formResult.innerHTML = '<div class="alert alert-danger mt-2" role="alert">Gagal mengirim pesan. ' + (error.text || "Silakan cek koneksi atau coba lagi nanti.") + '</div>';
-        submitBtn.disabled = false;
-      });
-    });
   }
 });
 
