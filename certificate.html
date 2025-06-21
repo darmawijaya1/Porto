@@ -103,36 +103,46 @@
       color: #0054d1;
       background: #e9f3ff;
     }
-    .search-bar {
-      min-width: 220px;
-      max-width: 330px;
-      border-radius: 2em;
-      padding-left: 2.3rem;
-      background: #f2f7fa;
-      border: 1.5px solid #b7d2ff;
-      font-size: 1.05rem;
-      box-shadow: 0 1px 7px #bcdfff19;
-      margin-right: 10px;
-      margin-bottom: 4px;
-      transition: border 0.17s;
-    }
-    .search-bar:focus {
-      border-color: #428cff;
-      box-shadow: 0 2px 14px #b5dfff28;
-    }
-    .search-icon {
-      position: absolute;
-      left: 1.2em;
-      top: 53%;
-      transform: translateY(-50%);
-      color: #71a2d7;
-      font-size: 1.22em;
-      pointer-events: none;
-    }
+    /* ======= ELEGANT SEARCH BAR ======= */
     .search-group {
       position: relative;
-      display: inline-block;
-      margin-right: 0.4em;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 0;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 0.85em 1.1em 0.85em 2.9em;
+      font-size: 1.09rem;
+      background: rgba(244,249,255,0.95);
+      border: none;
+      border-radius: 2em;
+      box-shadow: 0 3px 32px #a6bfff1b;
+      transition: box-shadow .2s, background .2s;
+      outline: none;
+      font-weight: 500;
+      color: #222e4e;
+      letter-spacing: 0.02em;
+    }
+    .search-bar:focus {
+      background: #f9fcff;
+      box-shadow: 0 4px 32px #489cff33;
+    }
+    .search-bar::placeholder { color: #b4c8e6; opacity: 1; font-weight: 400; }
+    .search-icon {
+      position: absolute;
+      left: 1.15em;
+      top: 52%;
+      transform: translateY(-50%);
+      color: #7ba0d9;
+      font-size: 1.25em;
+      opacity: 0.8;
+      z-index: 10;
+      pointer-events: none;
     }
     /* Modal img responsif */
     .modal-cert-img {
@@ -149,8 +159,8 @@
       .certificate-glass { padding: .7rem 0.2rem;}
       .filter-row { padding: .4rem 0; flex-direction: column;}
       .btn-issuer { font-size: .95rem; min-width: 90px;}
-      .search-bar { max-width: 100%; width: 100%; margin-bottom: .7em;}
-      .search-group { width: 100%; }
+      .search-bar { font-size: 1em; padding-left: 2.5em; }
+      .search-group { max-width: 100%; margin-right: 0; margin-bottom: 1em;}
       .modal-cert-img { max-width: 100vw; max-height: 48vh; }
     }
     [data-theme="dark"] .certificate-glass { background: #22273fda;}
@@ -158,7 +168,10 @@
     [data-theme="dark"] .certificate-title { color: #c5d4ff;}
     [data-theme="dark"] .certificate-issuer { color: #90c3ef;}
     [data-theme="dark"] .filter-row { background: #1d2237f2;}
-    [data-theme="dark"] .search-bar { background: #232946; border-color: #5c6b9e; color: #b1e0ff;}
+    [data-theme="dark"] .search-bar { background: rgba(44,55,90,0.91); color: #d6e8ff; box-shadow: 0 2px 14px #1b21461c;}
+    [data-theme="dark"] .search-bar:focus { background: #1b2238; box-shadow: 0 6px 28px #006bffa8; }
+    [data-theme="dark"] .search-icon { color: #72a3f3; opacity: 0.85; }
+    [data-theme="dark"] .search-bar::placeholder { color: #91b4e7; }
   </style>
 </head>
 <body>
