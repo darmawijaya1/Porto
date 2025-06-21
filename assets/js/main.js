@@ -33,33 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 3. DARK MODE LOGIC
-(function(){
-  const theme = localStorage.getItem('theme') || 'light';
-  document.body.setAttribute('data-theme', theme);
-})();
-
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('components/navbar.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('navbar-container').innerHTML = data;
-      setupDarkMode();
-    });
-  fetch('components/footer.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    });
-  if(document.getElementById('projects-row')) {
-    fetch('projects.json')
-      .then(res => res.json())
-      .then(projects => {
-        renderProjects(projects);
-        setupFilter(projects);
-      });
-  }
-});
-
 function setupDarkMode() {
   const toggle = document.getElementById('darkToggle');
   const iconLight = document.getElementById('icon-light');
@@ -75,6 +48,7 @@ function setupDarkMode() {
       updateIcon(theme);
     });
   }
+
   function updateIcon(t) {
     if (iconLight && iconDark) {
       if (t === 'dark') {
@@ -87,7 +61,6 @@ function setupDarkMode() {
     }
   }
 }
-
 
 // 4. FILTER PROJECT
 function setupFilter(projects) {
