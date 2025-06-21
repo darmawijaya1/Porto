@@ -1,27 +1,38 @@
 [
-    {
-      "title": "Website Portofolio",
-      "description": "Portofolio pribadi dengan dark mode dan animasi scroll.",
-      "image": "https://via.placeholder.com/600x400",
-      "category": "Frontend",
-      "demo": "#",
-      "source": "#"
-    },
-    {
-      "title": "Dashboard Admin",
-      "description": "Dashboard kelola data berbasis Laravel & Bootstrap.",
-      "image": "https://via.placeholder.com/600x400",
-      "category": "Backend",
-      "demo": "#",
-      "source": "#"
-    },
-    {
-      "title": "Aplikasi E-commerce",
-      "description": "Toko online sederhana dengan React & Express.",
-      "image": "https://via.placeholder.com/600x400",
-      "category": "Fullstack",
-      "demo": "#",
-      "source": "#"
-    }
-  ]
-  
+  {
+    "title": "Website Portofolio",
+    "description": "Portofolio pribadi dengan dark mode dan animasi scroll.",
+    "image": "https://via.placeholder.com/600x400",
+    "category": "Frontend",
+    "demo": "#",
+    "source": "#",
+    "date": "2025-06-01"
+  },
+  {
+    "title": "Dashboard Admin",
+    "description": "Dashboard kelola data berbasis Laravel & Bootstrap.",
+    "image": "https://via.placeholder.com/600x400",
+    "category": "Backend",
+    "demo": "#",
+    "source": "#",
+    "date": "2025-05-20"
+  },
+  {
+    "title": "Aplikasi E-commerce",
+    "description": "Toko online sederhana dengan React & Express.",
+    "image": "https://via.placeholder.com/600x400",
+    "category": "Fullstack",
+    "demo": "#",
+    "source": "#",
+    "date": "2025-05-01"
+  },
+  {
+    "title": "Landing Page Promo",
+    "description": "Landing page promosi produk dengan Bootstrap 5.",
+    "image": "https://via.placeholder.com/600x400",
+    "category": "Frontend",
+    "demo": "#",
+    "source": "#",
+    "date": "2025-04-10"
+  }
+]
