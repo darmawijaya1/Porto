@@ -8,84 +8,192 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
+    body {
+      font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg,#e8f0fc 0%,#f9fafe 100%);
+    }
+    [data-theme="dark"] body {
+      background: linear-gradient(120deg,#232946 0%,#121629 100%);
+    }
+    .section-bg {
+      background: rgba(255,255,255,0.76);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      box-shadow: 0 8px 40px rgba(44,62,80,0.11);
+      padding: 2.5rem 1.2rem 1.5rem 1.2rem;
+      margin-bottom: 2rem;
+    }
     .project-card {
-      position: relative;
+      border-radius: 2rem;
       border: none;
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 8px 32px rgba(80,104,139,0.14);
+      position: relative;
       overflow: hidden;
-      border-radius: 18px;
       transition: box-shadow 0.3s, transform 0.3s;
     }
     .project-card:hover {
-      box-shadow: 0 16px 40px rgba(44,62,80,0.18);
-      transform: translateY(-7px) scale(1.03);
+      box-shadow: 0 24px 52px 0 rgba(44,62,80,0.21),0 2px 6px rgba(80,104,139,0.08);
+      transform: translateY(-9px) scale(1.025);
+    }
+    .project-img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem 2rem 0 0;
     }
     .project-image {
       aspect-ratio: 16/10;
       object-fit: cover;
-      min-height: 180px;
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
-      transition: filter 0.3s;
+      min-height: 200px;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+      width: 100%;
+      transition: transform 0.35s cubic-bezier(.38,.65,.48,.92), filter 0.2s;
     }
     .project-card:hover .project-image {
-      filter: brightness(0.90) blur(1px);
+      transform: scale(1.07);
+      filter: brightness(0.92) blur(1.5px);
     }
     .project-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(24,29,38,0.73);
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s;
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg,rgba(0,22,61,0.17),rgba(28,45,110,0.17));
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      padding-bottom: 2rem;
       z-index: 2;
     }
     .project-card:hover .project-overlay {
       opacity: 1;
+      pointer-events: auto;
+    }
+    .project-overlay .btn {
+      margin-bottom: 0.5rem;
+      animation: slideup .45s cubic-bezier(.22,1.3,.46,1) both;
+    }
+    .project-overlay .btn-outline-light {
+      --bs-btn-hover-bg: #e7f2ff;
+      --bs-btn-hover-color: #36446b;
+      --bs-btn-border-color: #fff;
+      border-width: 2px;
+    }
+    @keyframes slideup {
+      0% { opacity:0; transform: translateY(30px);}
+      100%{ opacity:1; transform: translateY(0);}
     }
     .project-badge {
       position: absolute;
-      top: 16px;
-      left: 16px;
-      z-index: 3;
-      font-size: 0.88rem;
-      padding: 0.4em 0.9em;
-      border-radius: 1em;
-      background: rgba(0,123,255,0.92);
+      top: 18px; left: 18px;
+      z-index: 4;
+      font-size: 1rem;
+      letter-spacing: .02em;
+      font-weight: 500;
+      padding: 0.48em 1.2em;
+      border-radius: 1.1em;
+      box-shadow: 0 2px 16px rgba(0,123,255,0.14);
       color: #fff;
-      box-shadow: 0 2px 10px rgba(0,123,255,0.14);
+      background: linear-gradient(90deg,#5375fe,#19c7dd);
+      border: 2px solid #fff7;
+      backdrop-filter: blur(2px);
+      text-shadow: 0 2px 8px #065ff15e;
     }
-    @media (max-width: 576px) {
-      .project-image { min-height: 120px; }
-      .project-badge { font-size: 0.78rem; top: 10px; left: 10px; }
+    .project-badge[data-cat="Backend"] { background: linear-gradient(90deg,#ff6469,#fdba71);}
+    .project-badge[data-cat="Fullstack"] { background: linear-gradient(90deg,#64e69f,#5c8aff);}
+    .project-badge[data-cat="Frontend"] { background: linear-gradient(90deg,#1cb5e0,#000851);}
+    .project-card .card-body {
+      padding-bottom: 0.8rem;
+      padding-top: 1.1rem;
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #222e4e;
+      margin-bottom: .45rem;
+      letter-spacing: .01em;
+    }
+    .project-desc {
+      color: #53618b;
+      font-size: 0.98rem;
+      font-weight: 400;
+      margin-bottom: 0;
+      min-height: 38px;
+    }
+    [data-theme="dark"] .project-card {
+      background: rgba(27,30,41,0.99);
+      color: #e8edfb;
+      box-shadow: 0 10px 40px #23294644;
+    }
+    [data-theme="dark"] .section-bg {
+      background: rgba(21,24,37,0.98);
+    }
+    [data-theme="dark"] .project-title {
+      color: #e3e9ff;
+    }
+    [data-theme="dark"] .project-desc {
+      color: #c6d3f7;
     }
     .filter-row {
+      display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.7rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2.3rem;
+      padding: 1.1rem 0 1.2rem 0;
+      background: rgba(255,255,255,0.75);
+      border-radius: 1.4em;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 2px 18px rgba(0,132,255,0.08);
+      position: sticky;
+      top: 68px;
+      z-index: 20;
       scrollbar-width: thin;
       scrollbar-color: #b5d3fa #fff;
     }
-    .filter-row::-webkit-scrollbar { height: 5px; }
-    .filter-row::-webkit-scrollbar-thumb { background: #b5d3fa; border-radius: 2px; }
+    .filter-row::-webkit-scrollbar { height: 5px;}
+    .filter-row::-webkit-scrollbar-thumb { background: #b5d3fa; border-radius: 2px;}
+    .btn-category {
+      min-width: 100px;
+      font-weight: 600;
+      border-width: 2px;
+      border-radius: 1.5em;
+      font-size: 1rem;
+      letter-spacing: .01em;
+      background: transparent;
+      transition: all 0.17s;
+    }
+    .btn-category.active, .btn-category:focus {
+      background: linear-gradient(90deg,#0061ff,#60efff);
+      color: #fff;
+      border-color: #0b90f8;
+      box-shadow: 0 3px 10px #e5f3ff80;
+    }
+    .btn-category:not(.active):hover {
+      color: #0054d1;
+      background: #e9f3ff;
+    }
+    @media (max-width: 576px) {
+      .section-bg { padding: 1.2rem 0.3rem 1.2rem 0.3rem;}
+      .project-img-wrap { border-radius: 1.2rem 1.2rem 0 0;}
+      .project-image { min-height: 110px;}
+      .project-card { border-radius: 1.2rem; }
+      .filter-row { top: 58px; padding: 0.7rem 0; }
+      .project-badge { font-size: 0.85rem; top: 10px; left: 12px; }
+      .project-title { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
   <div id="navbar-container"></div>
-  <section class="py-5">
-    <div class="container">
-      <!-- Filter kategori -->
-      <div class="d-flex filter-row justify-content-center mb-3">
+  <section class="py-4">
+    <div class="container section-bg">
+      <h2 class="text-center fw-bold mb-5" data-aos="fade-down">Semua Projek</h2>
+      <div class="filter-row">
         <button class="btn btn-outline-primary btn-category active" data-category="All">All</button>
         <button class="btn btn-outline-primary btn-category" data-category="Frontend">Frontend</button>
         <button class="btn btn-outline-primary btn-category" data-category="Backend">Backend</button>
         <button class="btn btn-outline-primary btn-category" data-category="Fullstack">Fullstack</button>
       </div>
-      <!-- Grid Project -->
       <div class="row g-4" id="projects-row"></div>
     </div>
   </section>
@@ -112,7 +220,7 @@
         allProjects = projects;
         renderProjects(projects);
         setupFilter(projects);
-        AOS.init({ duration:800, once:true });
+        AOS.init({ duration:900, once:true });
       });
 
     function renderProjects(projects) {
@@ -125,19 +233,19 @@
       }
       projects.forEach(p=>{
         row.innerHTML += `
-          <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+          <div class="col-12 col-md-6 col-lg-4" data-aos="zoom-in-up">
             <div class="card project-card h-100 shadow-sm border-0 mb-3">
-              <div style="position:relative;">
+              <div class="project-img-wrap">
                 <img src="${p.image}" class="card-img-top project-image" alt="${p.title}">
-                <span class="project-badge">${p.category}</span>
+                <span class="project-badge" data-cat="${p.category}">${p.category}</span>
                 <div class="project-overlay">
                   <a href="${p.demo}" target="_blank" class="btn btn-light btn-sm fw-semibold mb-2 px-4">View Demo</a>
                   <a href="${p.source}" target="_blank" class="btn btn-outline-light btn-sm px-4">Source</a>
                 </div>
               </div>
               <div class="card-body pb-2">
-                <h5 class="card-title fw-bold mb-1">${p.title}</h5>
-                <p class="card-text small text-muted mb-0">${p.description}</p>
+                <h5 class="project-title mb-1">${p.title}</h5>
+                <p class="project-desc mb-0">${p.description}</p>
               </div>
               <div class="card-footer border-0 bg-transparent pt-1 d-flex justify-content-between align-items-center">
                 <span class="small text-muted">${p.date ? new Date(p.date).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}) : ''}</span>
