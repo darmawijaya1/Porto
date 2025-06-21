@@ -4,14 +4,14 @@
   document.body.setAttribute('data-theme', theme);
 })();
 
-// 2. NAVBAR & FOOTER INCLUDE
+// 2. NAVBAR & FOOTER INCLUDE + PROJECTS + FORM EMAIL
 document.addEventListener('DOMContentLoaded', () => {
   // Navbar
   fetch('components/navbar.html')
     .then(res => res.text())
     .then(data => {
       document.getElementById('navbar-container').innerHTML = data;
-      setupDarkMode(); // Pastikan tombol sudah ada di DOM
+      setupDarkMode();
     });
 
   // Footer
@@ -21,14 +21,50 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('footer-container').innerHTML = data;
     });
 
-  // Projects
+  // Projects (index.html/project.html)
   if(document.getElementById('projects-row')) {
     fetch('projects.json')
       .then(res => res.json())
       .then(projects => {
-        renderProjects(projects);
+        // Untuk index, biasanya hanya 3 terbaru. Untuk project.html, bisa semua.
+        const isIndex = !!document.querySelector('body#index-page');
+        let projectList = projects;
+        if (isIndex) {
+          projectList = [...projects].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,3);
+        }
+        renderProjects(projectList);
         setupFilter(projects);
+        if (window.AOS) AOS.refresh();
       });
+  }
+
+  // EmailJS Form Handler (contact.html)
+  const contactForm = document.getElementById('contact-form');
+  if(contactForm) {
+    if(typeof emailjs !== "undefined") {
+      emailjs.init("669XbrGsV_TiU7jML"); // Ganti dengan PUBLIC KEY kamu!
+    }
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const formResult = document.getElementById('form-result');
+      const submitBtn = this.querySelector('button[type="submit"]');
+      formResult.innerHTML = "<div class='text-info'>Mengirim...</div>";
+      submitBtn.disabled = true;
+
+      emailjs.send("service_c99hrhr", "template_qebox05", {
+        name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        time: new Date().toLocaleString("id-ID")
+      }).then(function(response) {
+        formResult.innerHTML = '<div class="alert alert-success mt-2" role="alert">Pesan terkirim! Terima kasih sudah menghubungi 😊</div>';
+        contactForm.reset();
+        submitBtn.disabled = false;
+      }, function(error) {
+        formResult.innerHTML = '<div class="alert alert-danger mt-2" role="alert">Gagal mengirim pesan. ' + (error.text || "Silakan cek koneksi atau coba lagi nanti.") + '</div>';
+        submitBtn.disabled = false;
+      });
+    });
   }
 });
 
@@ -85,9 +121,9 @@ function renderProjects(projects) {
   row.innerHTML = '';
   projects.forEach(p => {
     row.innerHTML += `
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
         <div class="card project-card h-100 shadow-sm">
-          <img src="${p.image}" class="card-img-top" alt="${p.title}">
+          <img src="${p.image}" class="card-img-top project-image" alt="${p.title}">
           <div class="card-body">
             <h5 class="card-title fw-bold">${p.title}</h5>
             <span class="badge bg-secondary mb-2">${p.category}</span>

@@ -9,28 +9,50 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" type="image/png" href="assets/img/logo.png">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg,#e8f0fc 0%,#f9fafe 100%);
+    }
+    [data-theme="dark"] body {
+      background: linear-gradient(120deg,#232946 0%,#121629 100%);
+    }
+    .contact-glass {
+      background: rgba(255,255,255,0.90);
+      border-radius: 2rem;
+      box-shadow: 0 8px 40px rgba(44,62,80,0.10);
+      padding: 2.5rem 1.2rem 2rem 1.2rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(7px);
+    }
+    @media (max-width: 768px) {
+      .contact-glass { padding: 1.3rem 0.4rem 1.7rem 0.4rem; border-radius: 1.3rem;}
+    }
+    [data-theme="dark"] .contact-glass {
+      background: rgba(27,30,41,0.99);
+    }
+  </style>
 </head>
 <body>
   <div id="navbar-container"></div>
 
   <section class="py-5">
-    <div class="container" data-aos="fade-up">
-      <h2 class="fw-bold mb-4 text-center"></h2>
+    <div class="container contact-glass shadow-lg" data-aos="fade-up">
       <h2 class="fw-bold mb-4 text-center">Hubungi Saya</h2>
-      <form id="contact-form" class="col-md-6 mx-auto">
+      <form id="contact-form" class="col-md-8 col-lg-6 mx-auto">
         <div class="mb-3">
           <label for="name" class="form-label">Nama</label>
-          <input type="text" class="form-control" id="name" required/>
+          <input type="text" class="form-control" id="name" name="from_name" required/>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" required/>
+          <input type="email" class="form-control" id="email" name="from_email" required/>
         </div>
         <div class="mb-3">
           <label for="message" class="form-label">Pesan</label>
-          <textarea class="form-control" id="message" rows="5" required></textarea>
+          <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-custom">Kirim</button>
+        <button type="submit" class="btn btn-primary btn-custom px-4">Kirim</button>
         <div id="form-result" class="mt-3"></div>
       </form>
     </div>
@@ -42,29 +64,33 @@
   <script src="assets/js/aos-init.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    // Inisialisasi EmailJS dengan Public Key
-    (function(){
-      emailjs.init("669XbrGsV_TiU7jML"); // Public Key
-    })();
-  
-    // GANTI "template_yyyyyy" dengan Template ID milikmu dari dashboard EmailJS
+    // Ganti dengan PUBLIC KEY kamu dari dashboard EmailJS
+    emailjs.init("669XbrGsV_TiU7jML");
+
+    // Pastikan service_id dan template_id sesuai dengan yang kamu buat di EmailJS
+    const SERVICE_ID = "service_c99hrhr";
+    const TEMPLATE_ID = "template_qebox05";
+
     document.getElementById('contact-form').addEventListener('submit', function(e){
       e.preventDefault();
       const formResult = document.getElementById('form-result');
-      formResult.innerHTML = "Mengirim...";
-  
-      emailjs.send("service_c99hrhr", "template_qebox05", {
+      const submitBtn = this.querySelector('button[type="submit"]');
+      formResult.innerHTML = "<div class='text-info'>Mengirim...</div>";
+      submitBtn.disabled = true;
+
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, {
         from_name: document.getElementById('name').value,
         from_email: document.getElementById('email').value,
         message: document.getElementById('message').value,
       }).then(function(response) {
-        formResult.innerHTML = '<span class="text-success">Pesan terkirim!</span>';
+        formResult.innerHTML = '<div class="alert alert-success mt-2" role="alert">Pesan terkirim! Terima kasih sudah menghubungi 😊</div>';
         document.getElementById('contact-form').reset();
+        submitBtn.disabled = false;
       }, function(error) {
-        formResult.innerHTML = '<span class="text-danger">Gagal mengirim pesan. ' + error.text + '</span>';
+        formResult.innerHTML = '<div class="alert alert-danger mt-2" role="alert">Gagal mengirim pesan. ' + (error.text || "Silakan cek koneksi atau coba lagi nanti.") + '</div>';
+        submitBtn.disabled = false;
       });
     });
   </script>
-  
 </body>
 </html>
