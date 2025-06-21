@@ -4,35 +4,35 @@
     "description": "Portofolio pribadi dengan dark mode dan animasi scroll.",
     "image": "assets/img/1.png",
     "category": "Frontend",
-    "demo": "#",
+    "demo": "https://man1balam.sch.id/",
     "source": "#",
-    "date": "2025-06-01"
+    "date": "2025-01-01"
   },
   {
-    "title": "Dashboard Admin",
-    "description": "Dashboard kelola data berbasis Laravel & Bootstrap.",
-    "image": "https://via.placeholder.com/600x400",
-    "category": "Backend",
-    "demo": "#",
-    "source": "#",
-    "date": "2025-05-20"
-  },
-  {
-    "title": "Aplikasi E-commerce",
-    "description": "Toko online sederhana dengan React & Express.",
-    "image": "https://via.placeholder.com/600x400",
+    "title": "Sikam",
+    "description": "Sikam atau yang dikenal Sistem Kelola Administrasi adalah suatu inovasi pelayanan yang di berikan oleh pihak sekolah yang bertujuan untuk agar siswa dapat memngajukan permohonan berbagai surat keperluan.",
+    "image": "assets/img/2.png",
     "category": "Fullstack",
-    "demo": "#",
+    "demo": "https://sikam.website.man1blampung.sch.id/",
     "source": "#",
-    "date": "2025-05-01"
+    "date": "2025-03-01"
   },
   {
-    "title": "Landing Page Promo",
-    "description": "Landing page promosi produk dengan Bootstrap 5.",
-    "image": "https://via.placeholder.com/600x400",
-    "category": "Frontend",
-    "demo": "#",
+    "title": "Prima",
+    "description": "Prima atau yang dikenal Piket Rekapitulasi Informasi dan Monitoring Absensi adalah suatu sistem untuk mendata kehadiran siswa dan murid secara transparan dan efisien.",
+    "image": "assets/img/3.png",
+    "category": "Fullstack",
+    "demo": "https://prima.man1blampung.sch.id/",
     "source": "#",
-    "date": "2025-04-10"
+    "date": "2025-04-01"
+  },
+  {
+    "title": "Chatal",
+    "description": "Chatbot berbasis AI Generatif yang bertujuan untuk menjaga Mental Health remaja.",
+    "image": "assets/img/4.png",
+    "category": "Backend",
+    "demo": "https://chatalai.vercel.app/",
+    "source": "#",
+    "date": "2025-06-10"
   }
 ]
