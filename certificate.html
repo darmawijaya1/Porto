@@ -52,10 +52,21 @@
       color: #b2bfcf;
       margin-left: 7px;
     }
-    .btn-verify {
+    .btn-verify, .btn-viewimg {
       border-radius: 1.3em;
       font-weight: 600;
       font-size: .96rem;
+    }
+    .btn-viewimg {
+      margin-right: 6px;
+      border-color: #87b5fa;
+      color: #3680ee;
+      background: #eaf4ff;
+      transition: background .18s, color .18s;
+    }
+    .btn-viewimg:hover {
+      background: #dbe9fb;
+      color: #28549b;
     }
     .filter-row {
       display: flex;
@@ -123,16 +134,16 @@
       display: inline-block;
       margin-right: 0.4em;
     }
-    [data-theme="dark"] .certificate-glass { background: #22273fda;}
-    [data-theme="dark"] .certificate-card { background: #1d2237; color: #e0ebf9;}
-    [data-theme="dark"] .certificate-title { color: #c5d4ff;}
-    [data-theme="dark"] .certificate-issuer { color: #90c3ef;}
-    [data-theme="dark"] .filter-row { background: #1d2237f2;}
-    [data-theme="dark"] .search-bar { background: #232946; border-color: #5c6b9e; color: #b1e0ff;}
-    .search-bar::-webkit-input-placeholder { color: #92aac7; }
-    .search-bar::-moz-placeholder { color: #92aac7; }
-    .search-bar:-ms-input-placeholder { color: #92aac7; }
-    .search-bar::placeholder { color: #92aac7; }
+    /* Modal img responsif */
+    .modal-cert-img {
+      max-width: 96vw;
+      max-height: 74vh;
+      border-radius: 1.2em;
+      box-shadow: 0 8px 28px #16234a38;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
     @media (max-width: 600px) {
       .certificate-image { height: 110px;}
       .certificate-glass { padding: .7rem 0.2rem;}
@@ -140,7 +151,14 @@
       .btn-issuer { font-size: .95rem; min-width: 90px;}
       .search-bar { max-width: 100%; width: 100%; margin-bottom: .7em;}
       .search-group { width: 100%; }
+      .modal-cert-img { max-width: 100vw; max-height: 48vh; }
     }
+    [data-theme="dark"] .certificate-glass { background: #22273fda;}
+    [data-theme="dark"] .certificate-card { background: #1d2237; color: #e0ebf9;}
+    [data-theme="dark"] .certificate-title { color: #c5d4ff;}
+    [data-theme="dark"] .certificate-issuer { color: #90c3ef;}
+    [data-theme="dark"] .filter-row { background: #1d2237f2;}
+    [data-theme="dark"] .search-bar { background: #232946; border-color: #5c6b9e; color: #b1e0ff;}
   </style>
 </head>
 <body>
@@ -160,6 +178,19 @@
       <div class="row g-4" id="certificate-row"></div>
     </div>
   </section>
+
+  <!-- Modal untuk lihat gambar sertifikat -->
+  <div class="modal fade" id="modalCertImg" tabindex="-1" aria-labelledby="modalCertImgLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body p-0 text-center">
+          <img src="" id="imgCertModal" class="modal-cert-img" alt="Sertifikat">
+          <div class="fw-bold my-2 text-white text-shadow-sm" id="imgCertModalLabel"></div>
+        </div>
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
 
   <div id="footer-container"></div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -240,7 +271,7 @@
         row.innerHTML = `<div class="col-12 text-center text-muted" data-aos="fade-up">Tidak ada sertifikat untuk filter ini.</div>`;
         return;
       }
-      certificates.forEach(c=>{
+      certificates.forEach((c,i)=>{
         row.innerHTML += `
           <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
             <div class="card certificate-card h-100">
@@ -256,7 +287,10 @@
                 </div>
               </div>
               <div class="card-footer bg-transparent border-0 pt-0 pb-3 text-end">
-                <a href="${c.link}" class="btn btn-outline-primary btn-verify" target="_blank">
+                <button type="button" class="btn btn-viewimg btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalCertImg" data-img="${c.image}" data-title="${c.title}">
+                  <i class="bi bi-camera-image me-1"></i> Lihat Gambar
+                </button>
+                <a href="${c.link}" class="btn btn-outline-primary btn-verify btn-sm" target="_blank">
                   <i class="bi bi-box-arrow-up-right"></i> Verifikasi
                 </a>
               </div>
@@ -264,6 +298,16 @@
           </div>
         `;
       });
+      // Event untuk tombol lihat gambar
+      setTimeout(() => {
+        document.querySelectorAll('.btn-viewimg').forEach(btn=>{
+          btn.addEventListener('click', function(){
+            document.getElementById('imgCertModal').src = btn.getAttribute('data-img');
+            document.getElementById('imgCertModal').alt = btn.getAttribute('data-title');
+            document.getElementById('imgCertModalLabel').innerText = btn.getAttribute('data-title');
+          });
+        });
+      }, 300);
     }
   </script>
 </body>
