@@ -1,21 +1,27 @@
-// Navbar and Footer include
+// 1. PASANG TEMA SAAT AWAL (dark/light langsung aktif sebelum DOMContentLoaded)
+(function(){
+  const theme = localStorage.getItem('theme') || 'light';
+  document.body.setAttribute('data-theme', theme);
+})();
+
+// 2. NAVBAR & FOOTER INCLUDE
 document.addEventListener('DOMContentLoaded', () => {
-  // Include Navbar
+  // Navbar
   fetch('components/navbar.html')
     .then(res => res.text())
     .then(data => {
       document.getElementById('navbar-container').innerHTML = data;
-      setupDarkMode(); // <-- PENTING: setelah navbar masuk ke DOM!
+      setupDarkMode(); // Pastikan tombol sudah ada di DOM
     });
 
-  // Include Footer
+  // Footer
   fetch('components/footer.html')
     .then(res => res.text())
     .then(data => {
       document.getElementById('footer-container').innerHTML = data;
     });
 
-  // Load Projects
+  // Projects
   if(document.getElementById('projects-row')) {
     fetch('projects.json')
       .then(res => res.json())
@@ -26,35 +32,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Dark Mode Logic
+// 3. DARK MODE LOGIC
 function setupDarkMode() {
   const toggle = document.getElementById('darkToggle');
   const iconLight = document.getElementById('icon-light');
   const iconDark = document.getElementById('icon-dark');
-  let theme = localStorage.getItem('theme') || 'light';
-  setTheme(theme);
+  let theme = document.body.getAttribute('data-theme') || 'light';
+  updateIcon(theme);
 
-  if(toggle) {
+  if (toggle) {
     toggle.addEventListener('click', function () {
       theme = (theme === 'light') ? 'dark' : 'light';
-      setTheme(theme);
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateIcon(theme);
     });
   }
 
-  function setTheme(t) {
-    document.body.setAttribute('data-theme', t);
-    localStorage.setItem('theme', t);
-    if (t === 'dark') {
-      if(iconLight) iconLight.style.display = "none";
-      if(iconDark) iconDark.style.display = "";
-    } else {
-      if(iconLight) iconLight.style.display = "";
-      if(iconDark) iconDark.style.display = "none";
+  function updateIcon(t) {
+    if (iconLight && iconDark) {
+      if (t === 'dark') {
+        iconLight.style.display = "none";
+        iconDark.style.display = "";
+      } else {
+        iconLight.style.display = "";
+        iconDark.style.display = "none";
+      }
     }
   }
 }
 
-// Project Filter
+// 4. FILTER PROJECT
 function setupFilter(projects) {
   const filterBtns = document.querySelectorAll('.btn-category');
   filterBtns.forEach(btn => {
@@ -70,7 +78,7 @@ function setupFilter(projects) {
   });
 }
 
-// Render Projects
+// 5. RENDER PROJECT
 function renderProjects(projects) {
   const row = document.getElementById('projects-row');
   if(!row) return;
