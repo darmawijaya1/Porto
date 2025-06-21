@@ -57,13 +57,51 @@
       font-weight: 600;
       font-size: .96rem;
     }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2.3rem;
+      padding: 1.1rem 0 1.2rem 0;
+      background: rgba(255,255,255,0.75);
+      border-radius: 1.4em;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 2px 18px rgba(0,132,255,0.08);
+      position: sticky;
+      top: 68px;
+      z-index: 20;
+    }
+    .btn-issuer {
+      min-width: 120px;
+      font-weight: 600;
+      border-width: 2px;
+      border-radius: 1.5em;
+      font-size: 1rem;
+      background: transparent;
+      transition: all 0.17s;
+    }
+    .btn-issuer.active, .btn-issuer:focus {
+      background: linear-gradient(90deg,#0061ff,#60efff);
+      color: #fff;
+      border-color: #0b90f8;
+      box-shadow: 0 3px 10px #e5f3ff80;
+    }
+    .btn-issuer:not(.active):hover {
+      color: #0054d1;
+      background: #e9f3ff;
+    }
     [data-theme="dark"] .certificate-glass { background: #22273fda;}
     [data-theme="dark"] .certificate-card { background: #1d2237; color: #e0ebf9;}
     [data-theme="dark"] .certificate-title { color: #c5d4ff;}
     [data-theme="dark"] .certificate-issuer { color: #90c3ef;}
+    [data-theme="dark"] .filter-row { background: #1d2237f2;}
     @media (max-width: 600px) {
       .certificate-image { height: 110px;}
       .certificate-glass { padding: .7rem 0.2rem;}
+      .filter-row { padding: .5rem 0;}
+      .btn-issuer { font-size: .95rem; min-width: 90px;}
     }
   </style>
 </head>
@@ -72,7 +110,9 @@
 
   <section class="py-5">
     <div class="container certificate-glass shadow-lg">
-      <h2 class="text-center fw-bold mb-5" data-aos="fade-down">Sertifikat</h2>
+      <h2 class="text-center fw-bold mb-4" data-aos="fade-down">Sertifikat</h2>
+      <!-- Filter bar -->
+      <div class="filter-row mb-4" id="issuer-filter"></div>
       <div class="row g-4" id="certificate-row"></div>
     </div>
   </section>
@@ -90,20 +130,57 @@
       document.getElementById('footer-container').innerHTML = data;
     });
 
-    // Load and render certificates (urutan otomatis terbaru dulu)
+    // Sertifikat dan filter
+    let allCertificates = [];
+    let selectedIssuer = 'Semua';
+
     fetch('certificates.json')
       .then(res=>res.json())
       .then(certificates=>{
-        // Urutkan dari paling baru ke paling lama
+        // Urutkan dari paling baru ke lama
         certificates.sort((a, b) => new Date(b.date) - new Date(a.date));
+        allCertificates = certificates;
+        renderIssuerFilter(certificates);
         renderCertificates(certificates);
         AOS.init({ duration:900, once:true });
       });
+
+    function renderIssuerFilter(certificates) {
+      const filterDiv = document.getElementById('issuer-filter');
+      if (!filterDiv) return;
+      // Get unique issuer
+      const issuers = [...new Set(certificates.map(c=>c.issuer))];
+      filterDiv.innerHTML = '';
+      // Tombol "Semua"
+      filterDiv.innerHTML += `<button class="btn btn-outline-primary btn-issuer active" data-issuer="Semua">Semua</button>`;
+      issuers.forEach(issuer => {
+        filterDiv.innerHTML += `<button class="btn btn-outline-primary btn-issuer" data-issuer="${issuer}">${issuer}</button>`;
+      });
+
+      // Event listener
+      filterDiv.querySelectorAll('.btn-issuer').forEach(btn=>{
+        btn.addEventListener('click', function(){
+          filterDiv.querySelectorAll('.btn-issuer').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedIssuer = btn.getAttribute('data-issuer');
+          if(selectedIssuer==="Semua"){
+            renderCertificates(allCertificates);
+          } else {
+            renderCertificates(allCertificates.filter(c=>c.issuer===selectedIssuer));
+          }
+          AOS.refresh();
+        });
+      });
+    }
 
     function renderCertificates(certificates) {
       const row = document.getElementById('certificate-row');
       if (!row) return;
       row.innerHTML = '';
+      if (certificates.length === 0) {
+        row.innerHTML = `<div class="col-12 text-center text-muted" data-aos="fade-up">Tidak ada sertifikat untuk penerbit ini.</div>`;
+        return;
+      }
       certificates.forEach(c=>{
         row.innerHTML += `
           <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
