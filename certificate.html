@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sertifikat | Darma Wijaya</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <style>
+    .certificate-glass {
+      background: rgba(255,255,255,0.96);
+      border-radius: 2.1rem;
+      box-shadow: 0 8px 36px rgba(44,62,80,0.13);
+      padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+      margin-bottom: 2.2rem;
+      backdrop-filter: blur(7px);
+    }
+    .certificate-card {
+      background: #fff;
+      border-radius: 1.1em;
+      box-shadow: 0 2px 18px #82a1d60c;
+      overflow: hidden;
+      transition: transform .18s, box-shadow .22s;
+      border: none;
+    }
+    .certificate-card:hover {
+      transform: translateY(-6px) scale(1.025);
+      box-shadow: 0 8px 28px #45629a2a;
+    }
+    .certificate-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: center;
+      background: #f3f7fa;
+    }
+    .certificate-title {
+      font-size: 1.11rem;
+      font-weight: 600;
+      color: #254574;
+    }
+    .certificate-issuer {
+      font-size: 0.97rem;
+      color: #6d8bb2;
+      font-style: italic;
+    }
+    .certificate-date {
+      font-size: .93rem;
+      color: #b2bfcf;
+      margin-left: 7px;
+    }
+    .btn-verify {
+      border-radius: 1.3em;
+      font-weight: 600;
+      font-size: .96rem;
+    }
+    [data-theme="dark"] .certificate-glass { background: #22273fda;}
+    [data-theme="dark"] .certificate-card { background: #1d2237; color: #e0ebf9;}
+    [data-theme="dark"] .certificate-title { color: #c5d4ff;}
+    [data-theme="dark"] .certificate-issuer { color: #90c3ef;}
+    @media (max-width: 600px) {
+      .certificate-image { height: 110px;}
+      .certificate-glass { padding: .7rem 0.2rem;}
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <section class="py-5">
+    <div class="container certificate-glass shadow-lg">
+      <h2 class="text-center fw-bold mb-5" data-aos="fade-down">Sertifikat</h2>
+      <div class="row g-4" id="certificate-row"></div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Navbar & Footer
+    fetch('components/navbar.html').then(res=>res.text()).then(data=>{
+      document.getElementById('navbar-container').innerHTML = data;
+      if(typeof setupDarkMode==='function') setupDarkMode();
+    });
+    fetch('components/footer.html').then(res=>res.text()).then(data=>{
+      document.getElementById('footer-container').innerHTML = data;
+    });
+
+    // Load and render certificates
+    fetch('certificates.json')
+      .then(res=>res.json())
+      .then(certificates=>{
+        renderCertificates(certificates);
+        AOS.init({ duration:900, once:true });
+      });
+
+    function renderCertificates(certificates) {
+      const row = document.getElementById('certificate-row');
+      if (!row) return;
+      row.innerHTML = '';
+      certificates.forEach(c=>{
+        row.innerHTML += `
+          <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="card certificate-card h-100">
+              <img src="${c.image}" alt="${c.title}" class="certificate-image">
+              <div class="card-body pb-2">
+                <div class="certificate-title mb-1">${c.title}</div>
+                <div class="certificate-issuer">
+                  ${c.issuer}
+                  <span class="certificate-date">
+                    <i class="bi bi-calendar-week"></i> 
+                    ${c.date ? new Date(c.date).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}) : ''}
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent border-0 pt-0 pb-3 text-end">
+                <a href="${c.link}" class="btn btn-outline-primary btn-verify" target="_blank">
+                  <i class="bi bi-box-arrow-up-right"></i> Verifikasi
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</body>
+</html>
