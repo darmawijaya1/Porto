@@ -1,17 +1,52 @@
 [
     {
-      "title": "",
-      "issuer": "",
-      "date": "2024-12-22",
-      "image": "assets/cert/1.jpg",
-      "link": "https://www.dicoding.com/certificates/XXXX"
+        "title": "Belajar Back-End Pemula dengan JavaScript",
+        "issuer": "Dicoding",
+        "date": "2025-06-20",
+        "image": "assets/cert/1.png",
+        "link": "https://www.dicoding.com/certificates/KEXL75V40XG2"
     },
     {
-      "title": "",
-      "issuer": "",
-      "date": "2023-07-15",
-      "image": "assets/cert/2.jpg",
-      "link": "https://coursera.org/verify/XXXX"
-    }
+        "title": "Belajar Dasar Pemrograman JavaScript",
+        "issuer": "Dicoding",
+        "date": "2025-06-16",
+        "image": "assets/cert/2.png",
+        "link": "https://www.dicoding.com/certificates/72ZD54O4LZYW"
+    },
+    {
+        "title": "Prompt Engineering untuk Software Developer",
+        "issuer": "Dicoding",
+        "date": "2025-06-05",
+        "image": "assets/cert/3.png",
+        "link": "https://www.dicoding.com/certificates/MRZMN245KPYQ"
+      },
+    {
+        "title": "Belajar Dasar Cloud dan Gen AI di AWS",
+        "issuer": "Dicoding",
+        "date": "2025-06-05",
+        "image": "assets/cert/4.png",
+        "link": "https://coursera.org/verify/XXXX"
+      },
+    {
+        "title": "Belajar Dasar Cloud dan Gen AI di AWS",
+        "issuer": "Dicoding",
+        "date": "2025-06-05",
+        "image": "assets/cert/4.png",
+        "link": "https://coursera.org/verify/XXXX"
+      },
+    {
+        "title": "Belajar Dasar Cloud dan Gen AI di AWS",
+        "issuer": "Dicoding",
+        "date": "2025-06-05",
+        "image": "assets/cert/4.png",
+        "link": "https://coursera.org/verify/XXXX"
+      },
+    {
+        "title": "Belajar Dasar Cloud dan Gen AI di AWS",
+        "issuer": "Dicoding",
+        "date": "2025-06-05",
+        "image": "assets/cert/4.png",
+        "link": "https://coursera.org/verify/XXXX"
+      }
   ]
   
