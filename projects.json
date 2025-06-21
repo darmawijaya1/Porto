@@ -28,7 +28,7 @@
   },
   {
     "title": "Chatal",
-    "description": "Chatbot berbasis AI Generatif yang bertujuan untuk menjaga Mental Health remaja.",
+    "description": "- Project Hackathon Dicoding X Microsoft Azure - Chatbot berbasis AI Generatif yang bertujuan untuk menjaga Mental Health remaja.",
     "image": "assets/img/4.png",
     "category": "Backend",
     "demo": "https://chatalai.vercel.app/",
