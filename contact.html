@@ -40,26 +40,29 @@
   <script src="assets/js/aos-init.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    // Inisialisasi EmailJS
+    // Inisialisasi EmailJS dengan Public Key
     (function(){
-      emailjs.init("YOUR_EMAILJS_USER_ID"); // Ganti dengan user ID EmailJS kamu
+      emailjs.init("669XbrGsV_TiU7jML"); // Public Key
     })();
-
-    // Handle form submit
+  
+    // GANTI "template_yyyyyy" dengan Template ID milikmu dari dashboard EmailJS
     document.getElementById('contact-form').addEventListener('submit', function(e){
       e.preventDefault();
       const formResult = document.getElementById('form-result');
       formResult.innerHTML = "Mengirim...";
-      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+  
+      emailjs.send("service_c99hrhr", "template_yyyyyy", {
         from_name: document.getElementById('name').value,
         from_email: document.getElementById('email').value,
         message: document.getElementById('message').value,
       }).then(function(response) {
         formResult.innerHTML = '<span class="text-success">Pesan terkirim!</span>';
+        document.getElementById('contact-form').reset();
       }, function(error) {
-        formResult.innerHTML = '<span class="text-danger">Gagal mengirim pesan.</span>';
+        formResult.innerHTML = '<span class="text-danger">Gagal mengirim pesan. ' + error.text + '</span>';
       });
     });
   </script>
+  
 </body>
 </html>
