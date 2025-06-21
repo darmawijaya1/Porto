@@ -1,8 +1,8 @@
 [
   {
-    "title": "Website Portofolio",
+    "title": "Website Sekolah",
     "description": "Portofolio pribadi dengan dark mode dan animasi scroll.",
-    "image": "https://via.placeholder.com/600x400",
+    "image": "assets/img/1.png",
     "category": "Frontend",
     "demo": "#",
     "source": "#",
