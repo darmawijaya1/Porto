@@ -104,6 +104,38 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="assets/js/aos-init.js"></script>
   <script src="assets/js/main.js"></script>
-  <!-- Tidak ada lagi script EmailJS langsung di sini -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // EmailJS Form Handler (hanya di contact.html)
+    document.addEventListener('DOMContentLoaded', function() {
+      if(typeof emailjs !== "undefined") {
+        emailjs.init("669XbrGsV_TiU7jML"); // Ganti dengan PUBLIC KEY kamu!
+      }
+      const contactForm = document.getElementById('contact-form');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          const formResult = document.getElementById('form-result');
+          const submitBtn = this.querySelector('button[type="submit"]');
+          formResult.innerHTML = "<div class='text-info'>Mengirim...</div>";
+          submitBtn.disabled = true;
+
+          emailjs.send("service_c99hrhr", "template_qebox05", {
+            name: document.getElementById('name').value,
+            from_email: document.getElementById('email').value,
+            message: document.getElementById('message').value,
+            time: new Date().toLocaleString("id-ID")
+          }).then(function(response) {
+            formResult.innerHTML = '<div class="alert alert-success mt-2" role="alert">Pesan terkirim! Terima kasih sudah menghubungi 😊</div>';
+            contactForm.reset();
+            submitBtn.disabled = false;
+          }, function(error) {
+            formResult.innerHTML = '<div class="alert alert-danger mt-2" role="alert">Gagal mengirim pesan. ' + (error.text || "Silakan cek koneksi atau coba lagi nanti.") + '</div>';
+            submitBtn.disabled = false;
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
