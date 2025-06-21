@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="icon" type="image/png" href="assets/img/logo.png">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
@@ -18,18 +17,58 @@
       background: linear-gradient(120deg,#232946 0%,#121629 100%);
     }
     .contact-glass {
-      background: rgba(255,255,255,0.90);
-      border-radius: 2rem;
-      box-shadow: 0 8px 40px rgba(44,62,80,0.10);
-      padding: 2.5rem 1.2rem 2rem 1.2rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 2.2rem;
+      box-shadow: 0 10px 44px rgba(44,62,80,0.12);
+      padding: 2.6rem 1.5rem 2.2rem 1.5rem;
       margin-bottom: 2.5rem;
-      backdrop-filter: blur(7px);
+      max-width: 560px;
     }
-    @media (max-width: 768px) {
-      .contact-glass { padding: 1.3rem 0.4rem 1.7rem 0.4rem; border-radius: 1.3rem;}
+    .form-label {
+      font-weight: 500;
+      color: #4055a4;
+      letter-spacing: 0.01em;
+    }
+    .btn-custom {
+      font-weight: 600;
+      border-radius: 30px;
+      font-size: 1.13rem;
+      padding: 10px 40px;
+      background: linear-gradient(90deg,#5078fe,#1cd0e6 88%);
+      border: none;
+      transition: all 0.17s;
+      box-shadow: 0 3px 16px #a1e4ff16;
+    }
+    .btn-custom:hover, .btn-custom:focus {
+      background: linear-gradient(90deg,#224fff,#1ccdeb 70%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
     }
     [data-theme="dark"] .contact-glass {
       background: rgba(27,30,41,0.99);
+      box-shadow: 0 10px 40px #23294655;
+    }
+    [data-theme="dark"] .form-label {
+      color: #c6dbff;
+    }
+    .form-control, textarea.form-control {
+      border-radius: 1.1em;
+      border-color: #e3e7fd;
+      background: #f9fafd;
+      font-size: 1.05rem;
+    }
+    [data-theme="dark"] .form-control, [data-theme="dark"] textarea.form-control {
+      background: #25283b;
+      color: #f8fbff;
+      border-color: #232c3d;
+    }
+    .form-control:focus, textarea.form-control:focus {
+      border-color: #4f8aff;
+      box-shadow: 0 0 0 0.15rem #51a6ff35;
+    }
+    @media (max-width: 768px) {
+      .contact-glass { padding: 1.5rem 0.5rem 1.7rem 0.5rem; border-radius: 1.2rem;}
+      .btn-custom { padding: 10px 20px; font-size: 1rem;}
     }
   </style>
 </head>
@@ -37,24 +76,26 @@
   <div id="navbar-container"></div>
 
   <section class="py-5">
-    <div class="container contact-glass shadow-lg" data-aos="fade-up">
-      <h2 class="fw-bold mb-4 text-center">Hubungi Saya</h2>
-      <form id="contact-form" class="col-md-8 col-lg-6 mx-auto">
-        <div class="mb-3">
-          <label for="name" class="form-label">Nama</label>
-          <input type="text" class="form-control" id="name" name="from_name" required/>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="from_email" required/>
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Pesan</label>
-          <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-custom px-4">Kirim</button>
-        <div id="form-result" class="mt-3"></div>
-      </form>
+    <div class="container d-flex flex-column align-items-center">
+      <div class="contact-glass shadow-lg w-100" data-aos="fade-up">
+        <h2 class="fw-bold mb-4 text-center text-primary">Hubungi Saya</h2>
+        <form id="contact-form" autocomplete="off">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nama Anda" required/>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Aktif</label>
+            <input type="email" class="form-control" id="email" name="from_email" placeholder="nama@email.com" required/>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Pesan</label>
+            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tulis pesan Anda..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-custom px-4">Kirim</button>
+          <div id="form-result" class="mt-3"></div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -63,34 +104,6 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="assets/js/aos-init.js"></script>
   <script src="assets/js/main.js"></script>
-  <script>
-    // Ganti dengan PUBLIC KEY kamu dari dashboard EmailJS
-    emailjs.init("669XbrGsV_TiU7jML");
-
-    // Pastikan service_id dan template_id sesuai dengan yang kamu buat di EmailJS
-    const SERVICE_ID = "service_c99hrhr";
-    const TEMPLATE_ID = "template_qebox05";
-
-    document.getElementById('contact-form').addEventListener('submit', function(e){
-      e.preventDefault();
-      const formResult = document.getElementById('form-result');
-      const submitBtn = this.querySelector('button[type="submit"]');
-      formResult.innerHTML = "<div class='text-info'>Mengirim...</div>";
-      submitBtn.disabled = true;
-
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        from_name: document.getElementById('name').value,
-        from_email: document.getElementById('email').value,
-        message: document.getElementById('message').value,
-      }).then(function(response) {
-        formResult.innerHTML = '<div class="alert alert-success mt-2" role="alert">Pesan terkirim! Terima kasih sudah menghubungi 😊</div>';
-        document.getElementById('contact-form').reset();
-        submitBtn.disabled = false;
-      }, function(error) {
-        formResult.innerHTML = '<div class="alert alert-danger mt-2" role="alert">Gagal mengirim pesan. ' + (error.text || "Silakan cek koneksi atau coba lagi nanti.") + '</div>';
-        submitBtn.disabled = false;
-      });
-    });
-  </script>
+  <!-- Tidak ada lagi script EmailJS langsung di sini -->
 </body>
 </html>
