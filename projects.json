@@ -1,0 +1,27 @@
+[
+    {
+      "title": "Website Portofolio",
+      "description": "Portofolio pribadi dengan dark mode dan animasi scroll.",
+      "image": "https://via.placeholder.com/600x400",
+      "category": "Frontend",
+      "demo": "#",
+      "source": "#"
+    },
+    {
+      "title": "Dashboard Admin",
+      "description": "Dashboard kelola data berbasis Laravel & Bootstrap.",
+      "image": "https://via.placeholder.com/600x400",
+      "category": "Backend",
+      "demo": "#",
+      "source": "#"
+    },
+    {
+      "title": "Aplikasi E-commerce",
+      "description": "Toko online sederhana dengan React & Express.",
+      "image": "https://via.placeholder.com/600x400",
+      "category": "Fullstack",
+      "demo": "#",
+      "source": "#"
+    }
+  ]
+  
