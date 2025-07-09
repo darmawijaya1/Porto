@@ -28,7 +28,6 @@
     @media (max-width: 768px) {
       .about-glass { padding: 1.2rem 0.2rem 1.2rem 0.2rem; border-radius: 1.1rem;}
     }
-    /* Avatar gradient ring */
     .avatar-gradient {
       display: inline-block;
       padding: 7px;
@@ -106,7 +105,6 @@
       font-weight: 600;
       font-size: 1.07rem;
       padding: 10px 26px;
-      margin-top: 18px;
       background: linear-gradient(90deg,#f8fcff,#e5f4ff 78%);
       color: #3a4fb2;
       border: 2px solid #527be8;
@@ -120,16 +118,6 @@
       box-shadow: 0 4px 24px #0052ff14;
       transform: translateY(-2px) scale(1.03);
       text-decoration: none;
-    }
-    [data-theme="dark"] .btn-download-cv {
-      background: #232946;
-      color: #99c5ff;
-      border-color: #5064d1;
-    }
-    [data-theme="dark"] .btn-download-cv:hover, [data-theme="dark"] .btn-download-cv:focus {
-      background: #1c2241;
-      color: #fff;
-      border-color: #90b7fc;
     }
     @media (max-width: 600px) {
       .avatar-gradient { padding: 4px;}
@@ -163,28 +151,18 @@
           </span>
           <div class="mt-2 fw-semibold" style="font-size:1.09rem;">Darma Wijaya</div>
           <span class="text-muted" style="font-size:.98rem;">Web Developer & Designer</span>
-          <!-- Tombol Download CV -->
-          <div>
-            <a href="assets/cv/darma-wijaya-cv.pdf" download class="btn btn-download-cv mt-3 d-inline-flex align-items-center">
+
+          <!-- Grup Tombol Aksi -->
+          <div class="d-grid gap-2 mt-4">
+            <a href="assets/cv/darma-wijaya-cv.pdf" download class="btn btn-download-cv d-inline-flex justify-content-center align-items-center">
               <i class="bi bi-download me-2"></i> Download CV
+            </a>
+            <a href="project.html" class="btn btn-download-cv d-inline-flex justify-content-center align-items-center">
+              <i class="bi bi-window-sidebar me-2"></i> Lihat Portofolio
             </a>
           </div>
         </div>
       </div>
-      <!-- Tombol Download CV -->
-<div>
-  <a href="assets/cv/darma-wijaya-cv.pdf" download class="btn btn-download-cv mt-3 d-inline-flex align-items-center">
-    <i class="bi bi-download me-2"></i> Download CV
-  </a>
-</div>
-
-<!-- Tombol Lihat Portofolio -->
-<div>
-  <a href="project.html" class="btn btn-download-cv mt-2 d-inline-flex align-items-center">
-    <i class="bi bi-window-sidebar me-2"></i> Lihat Portofolio
-  </a>
-</div>
-
 
       <!-- Bahasa -->
       <div class="row lang-list">
