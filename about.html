@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About | Darma Wijaya</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="icon" type="image/png" href="assets/img/logo.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <style>
     body {
       font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
-      background: linear-gradient(120deg,#e8f0fc 0%,#f9fafe 100%);
+      background: linear-gradient(120deg, #e8f0fc 0%, #f9fafe 100%);
     }
+
     [data-theme="dark"] body {
-      background: linear-gradient(120deg,#232946 0%,#121629 100%);
+      background: linear-gradient(120deg, #232946 0%, #121629 100%);
     }
+
     .about-glass {
-      background: rgba(255,255,255,0.92);
+      background: rgba(255, 255, 255, 0.92);
       border-radius: 2.4rem;
-      box-shadow: 0 8px 40px rgba(44,62,80,0.12);
-      padding: 2.7rem 2.1rem 2.1rem 2.1rem;
+      box-shadow: 0 8px 40px rgba(44, 62, 80, 0.12);
+      padding: 2.7rem 2.1rem;
       margin-bottom: 2.2rem;
       backdrop-filter: blur(10px);
     }
+
     @media (max-width: 768px) {
-      .about-glass { padding: 1.2rem 0.2rem 1.2rem 0.2rem; border-radius: 1.1rem;}
+      .about-glass {
+        padding: 1.2rem 0.2rem;
+        border-radius: 1.1rem;
+      }
     }
+
     .avatar-gradient {
       display: inline-block;
       padding: 7px;
@@ -35,16 +42,25 @@
       border-radius: 50%;
       box-shadow: 0 3px 12px #435bff23;
     }
+
     .avatar-img {
       border-radius: 50%;
       background: #fff;
       display: block;
       box-shadow: 0 2px 20px #2c62a81c;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
     }
+
+    .avatar-img:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 8px 24px #90b9ff42;
+    }
+
     .profile-summary {
       font-size: 1.08rem;
       color: #53618b;
     }
+
     .skill-icon {
       font-size: 1.6rem;
       color: #4f8aff;
@@ -52,32 +68,32 @@
       margin-right: 0.65em;
       filter: drop-shadow(0 2px 8px #d4e8ff33);
     }
+
     .skill-item {
       padding: 0.7rem 0.6rem;
       margin-bottom: 0.7rem;
-      background: rgba(244,249,255,0.64);
+      background: rgba(244, 249, 255, 0.64);
       border-radius: 0.9em;
       display: flex;
       align-items: center;
       font-weight: 500;
       font-size: 1.08rem;
-      letter-spacing: .01em;
-      transition: box-shadow 0.2s;
+      letter-spacing: 0.01em;
       box-shadow: 0 2px 10px #bcd1ff0c;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
+
     .skill-item:hover {
       background: #edf5ff;
       box-shadow: 0 5px 24px #b7d2ff1a;
+      transform: scale(1.02);
       color: #27428b;
     }
-    .lang-list {
-      margin-top: 1.9rem;
-      margin-bottom: .7rem;
-    }
+
     .lang-item {
       display: flex;
       align-items: center;
-      background: rgba(244,249,255,0.48);
+      background: rgba(244, 249, 255, 0.48);
       border-radius: 0.8em;
       padding: 0.6em 1.1em;
       margin-bottom: 0.6em;
@@ -86,43 +102,59 @@
       color: #42567b;
       box-shadow: 0 2px 8px #bdd4ff1b;
     }
+
     .lang-icon {
       font-size: 1.25em;
       margin-right: 0.7em;
       color: #23bbf4;
-      opacity: .85;
+      opacity: 0.85;
     }
-    .lang-label { font-weight: 600; margin-right: .6em; }
-    .lang-level { color: #7398c2; font-size: 0.97em;}
-    [data-theme="dark"] .about-glass { background: rgba(27,30,41,0.98);}
-    [data-theme="dark"] .profile-summary,
-    [data-theme="dark"] .skill-item { color: #c8daf8; background: #232946b4;}
-    [data-theme="dark"] .skill-item:hover { background: #1a2348; color: #fff;}
-    [data-theme="dark"] .lang-item { background: #22283db8; color: #d3e6ff;}
-    [data-theme="dark"] .lang-level { color: #90c9ff;}
+
+    .lang-label {
+      font-weight: 600;
+      margin-right: 0.6em;
+    }
+
+    .lang-level {
+      color: #7398c2;
+      font-size: 0.97em;
+    }
+
     .btn-download-cv {
       border-radius: 2em;
       font-weight: 600;
       font-size: 1.07rem;
       padding: 10px 26px;
-      background: linear-gradient(90deg,#f8fcff,#e5f4ff 78%);
+      background: linear-gradient(90deg, #f8fcff, #e5f4ff 78%);
       color: #3a4fb2;
       border: 2px solid #527be8;
       box-shadow: 0 3px 12px #4058b21a;
-      transition: all 0.17s;
+      transition: all 0.25s ease-in-out;
     }
-    .btn-download-cv:hover, .btn-download-cv:focus {
-      background: linear-gradient(90deg,#e3f1ff,#c6dfff 80%);
+
+    .btn-download-cv:hover,
+    .btn-download-cv:focus {
+      background: linear-gradient(90deg, #e3f1ff, #c6dfff 80%);
       color: #212d71;
       border-color: #527be8;
       box-shadow: 0 4px 24px #0052ff14;
-      transform: translateY(-2px) scale(1.03);
+      transform: scale(1.06);
       text-decoration: none;
     }
+
     @media (max-width: 600px) {
-      .avatar-gradient { padding: 4px;}
-      .avatar-img { width: 110px; height: 110px;}
-      .about-glass { padding: 0.8rem 0.1rem;}
+      .avatar-gradient {
+        padding: 4px;
+      }
+
+      .avatar-img {
+        width: 110px;
+        height: 110px;
+      }
+
+      .about-glass {
+        padding: 0.8rem 0.1rem;
+      }
     }
   </style>
 </head>
@@ -135,7 +167,7 @@
         <div class="col-md-8 text-center text-md-start" data-aos="fade-left">
           <h2 class="fw-bold mb-3">Tentang Saya</h2>
           <p class="profile-summary mb-4">
-            Saya <b>Darma Wijaya, S.Kom</b>, seorang <b>Web Developer</b> & <b>UI/UX Enthusiast</b> dari Indonesia.<br>
+            Saya <b>Darma Wijaya, S.Kom</b>, seorang <b>Web Developer</b> & <b>UI/UX Enthusiast</b> dari Indonesia.<br />
             Saya suka membangun produk digital yang <b>minimalis, cepat, dan ramah pengguna</b>.
             Aktif di komunitas teknologi, senang belajar hal baru, dan selalu mengeksplorasi teknologi web modern.
           </p>
@@ -145,15 +177,15 @@
             <li><span class="me-2 text-primary"><i class="bi bi-linkedin"></i></span> <a href="https://www.linkedin.com/in/darma-wijaya-089bb5147/" target="_blank">Darma Wijaya, S.Kom</a></li>
           </ul>
         </div>
-        <div class="col-md-4 text-center mb-4 mb-md-0" data-aos="fade-right">
+        <div class="col-md-4 text-center mb-4 mb-md-0" data-aos="zoom-in">
           <span class="avatar-gradient shadow-lg mb-3 d-inline-block">
-            <img src="assets/img/my.png" alt="Foto Darma" width="160" height="160" class="avatar-img shadow">
+            <img src="assets/img/my.png" alt="Foto Darma" width="160" height="160" class="avatar-img shadow" />
           </span>
-          <div class="mt-2 fw-semibold" style="font-size:1.09rem;">Darma Wijaya</div>
-          <span class="text-muted" style="font-size:.98rem;">Web Developer & Designer</span>
+          <div class="mt-2 fw-semibold" style="font-size: 1.09rem;">Darma Wijaya</div>
+          <span class="text-muted" style="font-size: 0.98rem;">Web Developer & Designer</span>
 
           <!-- Grup Tombol Aksi -->
-          <div class="d-grid gap-2 mt-4">
+          <div class="d-grid gap-2 mt-4" data-aos="fade-up" data-aos-delay="200">
             <a href="assets/cv/darma-wijaya-cv.pdf" download class="btn btn-download-cv d-inline-flex justify-content-center align-items-center">
               <i class="bi bi-download me-2"></i> Download CV
             </a>
@@ -165,8 +197,8 @@
       </div>
 
       <!-- Bahasa -->
-      <div class="row lang-list">
-        <div class="col-12" data-aos="fade-up">
+      <div class="row lang-list" data-aos="fade-up">
+        <div class="col-12">
           <h4 class="fw-bold mb-3">Bahasa</h4>
           <div class="row">
             <div class="col-12 col-sm-6">
@@ -188,34 +220,18 @@
       </div>
 
       <!-- Skills -->
-      <div class="row mt-3">
-        <div class="col-12" data-aos="fade-up">
+      <div class="row mt-3" data-aos="fade-up">
+        <div class="col-12">
           <h4 class="fw-bold mb-3">Skills</h4>
           <div class="row g-2">
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-code-slash skill-icon"></i>HTML &amp; CSS</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-filetype-js skill-icon"></i>JavaScript</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-bootstrap skill-icon"></i>Bootstrap</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-filetype-jsx skill-icon"></i>React.js</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-filetype-php skill-icon"></i>PHP</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-palette skill-icon"></i>UI/UX Design</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-filetype-cpp skill-icon"></i>C++</div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="skill-item"><i class="bi bi-database-fill-gear skill-icon"></i>MySQL</div>
-            </div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-code-slash skill-icon"></i>HTML & CSS</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-filetype-js skill-icon"></i>JavaScript</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-bootstrap skill-icon"></i>Bootstrap</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-filetype-jsx skill-icon"></i>React.js</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-filetype-php skill-icon"></i>PHP</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-palette skill-icon"></i>UI/UX Design</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-filetype-cpp skill-icon"></i>C++</div></div>
+            <div class="col-6 col-md-4"><div class="skill-item"><i class="bi bi-database-fill-gear skill-icon"></i>MySQL</div></div>
           </div>
         </div>
       </div>
@@ -225,7 +241,14 @@
   <div id="footer-container"></div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="assets/js/aos-init.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  </script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
